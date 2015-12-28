@@ -1,0 +1,31 @@
+fw = require("fw");
+
+edcl_init();
+
+mboot_path="";
+
+fw.run_code(mboot_path.."mboot-uemd.bin",true); -- start in slave mode
+fw.write_bootloader(mboot_path.."mboot-signed.bin") -- save signed loader in NAND
+
+-- all sizes are in bytes
+partition_table = {
+   { "kernel", 4*1024*1024 }, 
+   { "rootfs", "-" }, 
+}
+
+fw.partition(partition_table);
+
+-- prepare and erase all nand 
+fw.mboot_cmd("parterase kernel y y")
+fw.mboot_cmd("parterase rootfs y y")
+
+fw.flash_part("kernel", "uImage", false);
+fw.flash_part("dtb", "7707.dtb", false);
+fw.flash_part("rootfs", "filesystem.ubifs", false);
+fw.mboot_cmd("setenv bootargs console=ttyS0,38400n8 earlyprintk=serial ubi.mtd=4,2048 root=ubi0:rootfs rootfstype=ubifs rw");
+fw.mboot_cmd("setenv ipaddr 192.168.20.9")
+fw.mboot_cmd("setenv serverip 192.168.20.1")
+fw.mboot_cmd("setenv bootfile uImage-4")
+fw.mboot_cmd("setenv bootfdt 1")
+fw.mboot_cmd("setenv lockedcl 1");
+fw.mboot_cmd("save");
