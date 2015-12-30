@@ -20,6 +20,8 @@ wget http://www.module.ru/mb7707/ci/kernel/latest/uImage            -O uImage
 wget http://www.module.ru/mb7707/ci/kernel/latest/module-mb7707.dtb -O 7707.dtb
 wget http://www.module.ru/mb7707/ci/rootfs/${DISTRO}/${FLAVOR}/latest/rootfs-debian-jessie.ubifs -O filesystem.ubifs
 
+cd ..
+
 DATE=`date +%d%m%Y`
 mv firmware-package fw-${DISTRO}-${FLAVOR}-${DATE}
 tar cvpzf fw-${DISTRO}-${FLAVOR}-${DATE}.tgz fw-${DISTRO}-${FLAVOR}-${DATE}
