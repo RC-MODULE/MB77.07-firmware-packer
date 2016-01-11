@@ -1,12 +1,14 @@
 #!/bin/bash
 
+set -e
+
 [ "$DISTRO" == "" ] && DISTRO="debian_jessie"
 [ "$FLAVOR" == "" ] && FLAVOR="mb7707_minimal"
 
 [ -d firmware-package ] && rm -Rfv firmware-package/ 
 mkdir firmware-package
 
-for file in `ls|grep -v "*.sh"|grep -v firmware-package | grep -v output`; do
+for file in `ls|grep -v build.sh| grep -v "fw-*" | grep -v firmware-package | grep -v output`; do
     cp $file firmware-package/
 done
 
