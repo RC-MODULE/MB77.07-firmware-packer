@@ -18,7 +18,7 @@ wget http://www.module.ru/mb7707/ci/mboot/latest/mboot-signed.bin   -O mboot-sig
 wget http://www.module.ru/mb7707/ci/mboot/latest/mboot-uemd.bin     -O mboot-uemd.bin
 wget http://www.module.ru/mb7707/ci/kernel/latest/uImage            -O uImage
 wget http://www.module.ru/mb7707/ci/kernel/latest/module-mb7707.dtb -O 7707.dtb
-wget http://www.module.ru/mb7707/ci/rootfs/${DISTRO}/${FLAVOR}/latest/rootfs-${DISTRO}-jessie.ubifs -O filesystem.ubifs
+wget http://www.module.ru/mb7707/ci/rootfs/${DISTRO}/${FLAVOR}/latest/rootfs-${DISTRO}.ubifs -O filesystem.ubifs
 
 cd ..
 
