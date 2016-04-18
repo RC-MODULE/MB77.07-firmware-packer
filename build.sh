@@ -3,7 +3,6 @@
 set -e
 
 [ "$DISTRO" == "" ] && DISTRO="debian_jessie"
-[ "$FLAVOR" == "" ] && FLAVOR="mb7707_minimal"
 
 [ -d firmware-package ] && rm -Rfv firmware-package/ 
 mkdir firmware-package
@@ -20,10 +19,10 @@ wget http://www.module.ru/mb7707/ci/mboot/latest/mboot-signed.bin   -O mboot-sig
 wget http://www.module.ru/mb7707/ci/mboot/latest/mboot-uemd.bin     -O mboot-uemd.bin
 wget http://www.module.ru/mb7707/ci/kernel/latest/uImage            -O uImage
 wget http://www.module.ru/mb7707/ci/kernel/latest/module-mb7707.dtb -O 7707.dtb
-wget http://www.module.ru/mb7707/ci/rootfs/${DISTRO}/${FLAVOR}/latest/rootfs-${DISTRO}.ubifs -O filesystem.ubifs
+wget http://www.module.ru/mb7707/ci/rootfs/${DISTRO}/latest/rootfs.ubifs -O filesystem.ubifs
 
 cd ..
 
 DATE=`date +%d%m%Y`
-mv firmware-package fw-${DISTRO}-${FLAVOR}-${DATE}
-tar cvpzf fw-${DISTRO}-${FLAVOR}-${DATE}.tgz fw-${DISTRO}-${FLAVOR}-${DATE}
+mv firmware-package fw-${DISTRO}-${DATE}
+tar cvpzf fw-${DISTRO}-${DATE}.tgz fw-${DISTRO}-${DATE}
